@@ -61,10 +61,10 @@
 // app.listen(5000, () => {
 //   console.log("Server running on port 5000");
 // });
-
+require("dotenv").config();
 const express = require('express');
 const app = express();
-require("dotenv").config();
+
 const cors = require('cors');
 app.use(cors());
 
