@@ -5,7 +5,8 @@
  */
 
 
-module.exports = knex;
+require("dotenv").config();
+
 module.exports = {
   development: {
     client: "pg",
