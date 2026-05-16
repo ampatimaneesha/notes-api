@@ -108,7 +108,7 @@ const options = {
 
     servers: [
       {
-        url: "http://localhost:5000",
+        url: "https://notes-api-mrno.onrender.com/",
       },
     ],
   },
@@ -132,8 +132,15 @@ app.use('/api/notes', noteRoutes);
 
 // ✅ START SERVER
 
+
+
+
 const PORT = process.env.PORT || 5000;
 
+app.get("/", (req, res) => {
+  res.send("Backend running");
+});
+
 app.listen(PORT, () => {
-  console.log("Server running");
+  console.log(`Server running on port ${PORT}`);
 });
