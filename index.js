@@ -66,6 +66,7 @@ const express = require('express');
 const app = express();
 
 const cors = require('cors');
+const { Pool } = require("pg");
 app.use(cors());
 
 
@@ -74,6 +75,13 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
 // ✅ IMPORT SWAGGER
 const swaggerJsdoc = require("swagger-jsdoc");
@@ -139,6 +147,28 @@ const PORT = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
   res.send("Backend running");
+});
+app.get("/test-db", async (req, res) => {
+  try {
+
+    const result = await pool.query(
+      "SELECT NOW()"
+    );
+
+    res.json({
+      success: true,
+      time: result.rows[0]
+    });
+
+  } catch (err) {
+
+    console.log(err);
+
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  }
 });
 
 app.listen(PORT, () => {
