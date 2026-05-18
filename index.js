@@ -70,8 +70,16 @@ const { Pool } = require("pg");
 app.use(cors());
 
 
+// app.use(cors({
+//   origin: "https://notes-app-jipg.vercel.app",
+//   credentials: true
+// }));
 app.use(cors({
-  origin: "https://notes-app-jipg.vercel.app",
+  origin: [
+    "https://notes-app-jipg.vercel.app",
+    "http://localhost:3000",
+    "http://localhost:3001"
+  ],
   credentials: true
 }));
 app.use(express.json());
