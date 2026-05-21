@@ -40,17 +40,13 @@ router.post("/add", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// DELETE NOTE
-// MOVE NOTE TO TRASH
+//delete notes
 router.delete("/:id", async (req, res) => {
   try {
 
     await db("notes")
       .where({ id: req.params.id })
-      .update({
-        deleted: true,
-      });
+      .del();
 
     res.json({
       success: true
