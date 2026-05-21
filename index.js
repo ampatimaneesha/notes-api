@@ -17,9 +17,11 @@ const app = express();
 app.use(cors({
   origin: [
     "https://notes-app-jipg.vercel.app",
+    "https://notes-app-jipg-2v1cqx27c-ampatimaneeshagmailcoms-projects.vercel.app",
     "http://localhost:3000",
     "http://localhost:3001"
   ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
